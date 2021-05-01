@@ -22,7 +22,9 @@ const todo = new mongoose.Schema({
     required: true
   },
 
-  createdAt :  { type: Date, default: Date.now },
+  createdAt: { type: Date, expires: 1800 , default: Date.now } 
+
 })
+todo.index({ createdAt: 1 }, { expireAfterSeconds: 1800 });
 
 exports.todoschema = mongoose.model('todo', todo)
