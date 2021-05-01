@@ -2,7 +2,7 @@ const dotenv = require('dotenv')
 dotenv.config({path : './config.env'})
 const express = require('express')
 const PORT = process.env.PORT
-
+require('./database/connect')
 const app = express()
 
 app.get('/todo', async (req,res) => {
