@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const ttl = require('mongoose-ttl')
 const todo = new mongoose.Schema({
 
   taskName : {
@@ -22,9 +22,10 @@ const todo = new mongoose.Schema({
     required: true
   },
 
-  createdAt: { type: Date, expires: 1800 , default: Date.now } 
+//createdAt: { type: Date, expires: '1m' , default: Date.now } 
 
-})
-todo.index({ createdAt: 1 }, { expireAfterSeconds: 1800 });
+}, {timestamps: true })
+//todo.index({ createdAt: 1 }, { expireAfterSeconds: 60 });
+ todo.plugin(ttl, { ttl: '5m' });
 
 exports.todoschema = mongoose.model('todo', todo)
